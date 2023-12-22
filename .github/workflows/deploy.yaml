@@ -10,8 +10,8 @@ jobs:
     steps:
         - uses: actions/checkout@v3
         - run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-        - run: docker build -t bear-bear-bear/leaning-docker-1 -f Dockerfile.dev .
-        - run: docker run -e CI=true bear-bear-bear/leaning-docker-1 npm run test
+        - run: docker build -t 3bear/leaning-docker-1 -f Dockerfile.dev .
+        - run: docker run -e CI=true 3bear/leaning-docker-1 npm run test
 
         - name: Generate deployment package
           run: zip -r deploy.zip . -x "*.git*"
