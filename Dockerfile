@@ -7,9 +7,9 @@ RUN npm install
 
 COPY . .
 
-CMD ["npm", "run", "build"]
-
 RUN echo 'time'
+
+CMD ["npm", "run", "build"]
 
 FROM nginx
 EXPOSE 80
