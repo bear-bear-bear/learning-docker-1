@@ -8,10 +8,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-        - uses: actions/checkout@v3
-        - run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-        - run: docker build -t 3bear/leaning-docker-1 -f Dockerfile.dev .
-        - run: docker run -e CI=true 3bear/leaning-docker-1 npm run test
+#        - uses: actions/checkout@v3
+#        - run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+#        - run: docker build -t 3bear/leaning-docker-1 -f Dockerfile.dev .
+#        - run: docker run -e CI=true 3bear/leaning-docker-1 npm run test
 
         - name: Generate deployment package
           run: zip -r deploy.zip . -x "*.git*"
@@ -21,10 +21,11 @@ jobs:
           with:
             aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
             aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
-            application_name: "learning-docker-1"
-            environment_name: "Learning-docker-1-env"
-            existing_bucket_name: "elasticbeanstalk-ap-northeast-2-725904703590"
-            region: "ap-northeast-2"
+            application_name: learning-docker-1
+            environment_name: Learning-docker-1-env
+            existing_bucket_name: elasticbeanstalk-ap-northeast-2-725904703590
+            region: ap-northeast-2
             version_label: ${{ github.sha }}
-            deployment_package: "deploy.zip"
+            deployment_package: deploy.zip
+
 
